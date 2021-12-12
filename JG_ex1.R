@@ -126,17 +126,6 @@ rect.hclust(clustering.hierarchical, k=3, border="red") # draw dendogram with re
 clustering.dbscan <- dbscan::hdbscan(d, minPts = 5)
 clusplot(as.matrix(d), clustering.dbscan$cluster, color=T, shade=T, labels=2, lines=0)
 
-# EM
-gm<-normalmixEM((d),k=3, epsilon = 1e-3, lambda=c(0.33,0.33,0.33))
-pred<-apply(gm$posterior, 1, function(row) which.max(row))
-plot(gm)
-clusplot(as.matrix(d), pred[1:44], color=T, shade=T, labels=2, lines=0)
-
-
-gm<-normalmixEM((d),k=2, epsilon = 1e-3, lambda=c(0.7,0.3))
-pred<-apply(gm$posterior, 1, function(row) which.max(row))
-
-
 # PAM
 clustering.pam <- pam(d, 3)
 clusplot(as.matrix(d), clustering.pam$cluster, color=T, shade=T, labels=2, lines=0, main = "K-medoids")
